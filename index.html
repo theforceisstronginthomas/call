@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+ <html> 
+<head>
+	<style>
+	</style>
+</head>
+<body>
+
+	
+	<a href="#"  rel="external" id="ext"  onclick="document.location='tel:+260978451180'" >call </a>
+    
+    
+    
+    
+    <script>
+        
+       Ext.setup({
+    onReady: function(){
+	
+        var rootPanel = new Ext.form.FormPanel({
+	    fullscreen: true,
+	        items: [
+		    {
+			xtype:'button',
+			text:'Call +260978451180',
+			scope:this,
+			handler: callSomeone
+		    }
+		],
+		dockedItems:[
+		    {
+			xtype:'toolbar',
+			dock:'top',
+			title:'Phone Dialer Example'
+		    }          
+		]
+	    }
+	);
+	
+	function callSomeone(){
+	    var msg = Ext.Msg.confirm('Please Confirm','Are you sure you want to make a phone call?',
+		function(r){
+		    if (r == 'yes'){
+		        if (Ext.is.Android){
+		            document.location.href = 'tel:+260978451180';
+			} else { // we assume the device is running iOS
+			    window.plugins.phoneDialer.dial('+260978451180');
+			}
+		    }   
+		}
+	    );
+	    msg.doComponentLayout();
+	}
+ 
+    }
+});
+</script>
+
+</body>
+</html>
